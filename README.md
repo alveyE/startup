@@ -18,3 +18,5 @@ I am going to make a grocery price tracker that helps users find the best deals 
 - **Authentication**: Allow users to register, log in, and view their saved grocery lists
 - **Database**: Store user accounts, grocery lists, and past purchases, then display grocery lists (will likely use mongoDB or some SQL database)
 - **WebSocket**: Provide real-time updates on new sales and price changes
+
+![image info](sketch.jpg)
