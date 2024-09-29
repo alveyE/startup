@@ -13,3 +13,5 @@ Login - Login or create account (this is neccesary to save grocery lists)
 List - User can view their grocery list, edit quantities, and the application does the math to find the cheapest store for them based on their list
 
 Sales - Shows current sales going on (this is where the websocket will be used as it will live update sales found)
+
+Product - The product page will focus on one product showing a breakdown of price at each
