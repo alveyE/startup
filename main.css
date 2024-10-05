@@ -10,13 +10,13 @@
   border: 1px solid #ccc;
   padding: 10px;
   text-align: center;
-  border-radius: 12px; /* Added rounded corners */
+  border-radius: 12px;
 }
 
 .grid-item img {
   max-width: 100%;
   height: auto;
-  border-radius: 12px; /* Added rounded corners to images */
+  border-radius: 12px;
 }
 
 body {
@@ -46,6 +46,21 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+li:last-child {
+  border-bottom: none;
 }
 
 .button {
@@ -104,7 +119,7 @@ a:hover {
   overflow: hidden;
   border-radius: 25px;
   padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .navbar a {
@@ -126,5 +141,5 @@ a:hover {
 
 .navbar .active {
   background-color: #004c99;
-  font-weight: bold; /* Added bold font for active link */
+  font-weight: bold;
 }
