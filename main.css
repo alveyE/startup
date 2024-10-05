@@ -91,6 +91,8 @@ li:last-child {
   border: 1px solid #ccc;
   border-radius: 25px;
   overflow: hidden;
+  height: 50px;
+  font-size: large;
 }
 
 .search-bar input[type="text"] {
@@ -119,7 +121,8 @@ li:last-child {
   overflow: hidden;
   border-radius: 25px;
   padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  align-items: center;
 }
 
 .navbar a {
@@ -127,7 +130,8 @@ li:last-child {
   display: block;
   color: white;
   text-align: center;
-  padding: 10px 15px;
+  font-size: 1.5em;
+  padding: 15px 20px;
   text-decoration: none;
   transition: background-color 0.3s ease, transform 0.3s ease;
   border-radius: 12px;
@@ -142,4 +146,10 @@ li:last-child {
 .navbar .active {
   background-color: #004c99;
   font-weight: bold;
+  text-decoration: underline;
+}
+
+.navbar a:first-child {
+  font-size: 1.5em;
+  padding: 15px 20px;
 }
