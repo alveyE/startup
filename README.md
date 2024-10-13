@@ -34,3 +34,9 @@ List - User can view their grocery list, edit quantities, and the application do
 Sales - Shows current sales going on (this is where the websocket will be used as it will live update sales found)
 
 Product - The product page will focus on one product showing a breakdown of price at each
+
+## CSS
+
+Basic styling for lists using grids and other basic css
+
+I'm guessing a lot/most of this will change when we move to react
