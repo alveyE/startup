@@ -15,3 +15,7 @@ List - User can view their grocery list, edit quantities, and the application do
 Sales - Shows current sales going on (this is where the websocket will be used as it will live update sales found)
 
 Product - The product page will focus on one product showing a breakdown of price at each
+
+-Javascript
+
+    every function for array runs test condition for each element and returns if true for all
