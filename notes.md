@@ -19,3 +19,7 @@ Product - The product page will focus on one product showing a breakdown of pric
 -Javascript
 
     every function for array runs test condition for each element and returns if true for all
+
+-React
+
+    allows for dynamic components, routes, and simplified code structure
