@@ -1,4 +1,4 @@
-const List = () => {
+function List() {
   return (
     <div>
       <h1>List Page</h1>
@@ -9,6 +9,6 @@ const List = () => {
       </ul>
     </div>
   );
-};
+}
 
 export default List;

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "../main.css";
 
-export function Navbar({ activePage }) {
+function Navbar({ activePage }) {
   return (
     <div className="navbar">
       <Link className={activePage === "home" ? "active" : ""} to="/">
