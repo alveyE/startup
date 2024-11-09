@@ -9,7 +9,7 @@ export function Product({ name, price, store, imgSrc }) {
       <img src={imgSrc} alt={name} />
       <div>
         <h2>
-          <a href={`product/${name}`}>{name}</a>
+          <a href={`product.html`}>{name}</a>
         </h2>
         <p style={{ fontSize: "larger" }}>{price}</p>
         <p style={{ fontSize: "larger" }}>{store}</p>

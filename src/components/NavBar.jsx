@@ -1,17 +1,18 @@
+import { Link } from "react-router-dom";
 import "../main.css";
 
 export function Navbar({ activePage }) {
   return (
     <div className="navbar">
-      <a className={activePage === "home" ? "active" : ""} href="index.html">
+      <Link className={activePage === "home" ? "active" : ""} to="/">
         Aisle Hawk
-      </a>
-      <a className={activePage === "list" ? "active" : ""} href="list.html">
+      </Link>
+      <Link className={activePage === "list" ? "active" : ""} to="/list">
         My List
-      </a>
-      <a className={activePage === "sales" ? "active" : ""} href="sales.html">
+      </Link>
+      <Link className={activePage === "sales" ? "active" : ""} to="/sales">
         Sales
-      </a>
+      </Link>
     </div>
   );
 }

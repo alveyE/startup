@@ -1,35 +1,51 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import "../main.css";
+import Navbar from "../components/NavBar";
+import { Product } from "../components/Product";
+import Footer from "../components/Footer";
 
-function App() {
-  const [count, setCount] = useState(0);
-
+function Home() {
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <Navbar activePage="home" />
+      <input type="text" placeholder="Search" className="search-bar" />
+      <div className="grid-container">
+        <Product
+          name="Bread"
+          price="$1.42"
+          store="Walmart"
+          imgSrc="https://i5.walmartimages.com/seo/Great-Value-White-Round-Top-Bread-20-oz_8e69fca6-dda1-47b1-959c-7ec4d84b0a58.8cae75bc1ffe9c3d1ece768c0e5447a2.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF"
+        />
+        <Product
+          name="Banana"
+          price="$0.26"
+          store="Walmart"
+          imgSrc="https://i5.walmartimages.com/seo/Fresh-Banana-Fruit-Each_5939a6fa-a0d6-431c-88c6-b4f21608e4be.f7cd0cc487761d74c69b7731493c1581.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF"
+        />
+        <Product
+          name="Milk"
+          price="$2.99"
+          store="Walmart"
+          imgSrc="https://i5.walmartimages.com/seo/Great-Value-Milk-Whole-Vitamin-D-Gallon-Plastic-Jug_6a7b09b4-f51d-4bea-a01c-85767f1b481a.86876244397d83ce6cdedb030abe6e4a.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF"
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+      <div style={{ textAlign: "center", marginTop: "20px" }}>
+        <p style={{ fontSize: "larger", fontWeight: "bold" }}>
+          To make and save lists
         </p>
+        <a
+          href="login.html"
+          style={{
+            fontSize: "larger",
+            color: "blue",
+            textDecoration: "underline",
+          }}
+        >
+          Login or Create Account
+        </a>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Footer />
     </>
   );
 }
 
-export default App;
+export default Home;
