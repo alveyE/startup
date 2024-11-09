@@ -1,11 +1,15 @@
-export function Navbar() {
+export function Navbar({ activePage }) {
   return (
     <div className="navbar">
-      <a className="active" href="index.html">
+      <a className={activePage === "home" ? "active" : ""} href="index.html">
         Aisle Hawk
       </a>
-      <a href="list.html">My List</a>
-      <a href="sales.html">Sales</a>
+      <a className={activePage === "list" ? "active" : ""} href="list.html">
+        My List
+      </a>
+      <a className={activePage === "sales" ? "active" : ""} href="sales.html">
+        Sales
+      </a>
     </div>
   );
 }
