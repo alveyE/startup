@@ -1,3 +1,5 @@
+import "../main.css";
+
 export function Navbar({ activePage }) {
   return (
     <div className="navbar">
