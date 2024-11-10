@@ -1,7 +1,7 @@
 import "../main.css";
 import Navbar from "../components/NavBar";
 import { Product } from "../components/Product";
-import Footer from "../components/Footer";
+import Footer, { MakeSaveList } from "../components/Footer";
 
 function Home() {
   return (
@@ -28,21 +28,7 @@ function Home() {
           imgSrc="https://i5.walmartimages.com/seo/Great-Value-Milk-Whole-Vitamin-D-Gallon-Plastic-Jug_6a7b09b4-f51d-4bea-a01c-85767f1b481a.86876244397d83ce6cdedb030abe6e4a.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF"
         />
       </div>
-      <div style={{ textAlign: "center", marginTop: "20px" }}>
-        <p style={{ fontSize: "larger", fontWeight: "bold" }}>
-          To make and save lists
-        </p>
-        <a
-          href="login.html"
-          style={{
-            fontSize: "larger",
-            color: "blue",
-            textDecoration: "underline",
-          }}
-        >
-          Login or Create Account
-        </a>
-      </div>
+      <MakeSaveList />
       <Footer />
     </>
   );

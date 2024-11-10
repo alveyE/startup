@@ -64,6 +64,12 @@ li {
   border-bottom: 1px solid #ccc;
 }
 
+li image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
 li:last-child {
   border-bottom: none;
 }
@@ -122,6 +128,7 @@ li:last-child {
 }
 
 .navbar {
+  width: 100%;
   background-color: #0066cc;
   overflow: hidden;
   border-radius: 25px;
@@ -204,7 +211,7 @@ input:focus {
 }
 
 .summary {
-  background-color: #f9f9f9;
+  background-color: #3d3d3d;
   border: 1px solid #ccc;
   padding: 20px;
   border-radius: 12px;
@@ -223,7 +230,12 @@ table {
   width: 100%;
   border-collapse: collapse;
 }
-th,
+th {
+  color: #000000;
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
 td {
   border: 1px solid #ddd;
   padding: 8px;
