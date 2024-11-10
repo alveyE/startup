@@ -1,9 +1,10 @@
 import React from "react";
 import "../main.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function Product({ product }) {
   const { name, imgSrc, prices } = product;
+  const navigate = useNavigate();
 
   const { store, price } = Object.entries(prices).reduce(
     (cheapest, [store, price]) =>
@@ -13,16 +14,28 @@ export function Product({ product }) {
 
   const [addedToList, setAddedToList] = React.useState(false);
 
+  function handleProductClick() {
+    navigate("/product", { state: { product } });
+  }
+
   return (
-    <div className="grid-item">
+    <div
+      className="grid-item"
+      onClick={handleProductClick}
+      style={{ cursor: "pointer" }}
+    >
       <img src={imgSrc} alt={name} />
       <div>
-        <h2>
-          <Link to={`/product`}>{name}</Link>
-        </h2>
+        <h2>{name}</h2>
         <p style={{ fontSize: "larger" }}>{price}</p>
         <p style={{ fontSize: "larger" }}>{store}</p>
-        <button className="button" onClick={() => setAddedToList(!addedToList)}>
+        <button
+          className="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setAddedToList(!addedToList);
+          }}
+        >
           {addedToList ? "Remove from my list" : "Add to my list"}
         </button>
       </div>
@@ -30,21 +43,32 @@ export function Product({ product }) {
   );
 }
 
-export function SaleProduct({ name, originalPrice, salePrice, store, imgSrc }) {
+export function SaleProduct({ product, originalPrice, salePrice, store }) {
   const [addedToList, setAddedToList] = React.useState(false);
+  const navigate = useNavigate();
+
+  const { name, imgSrc } = product;
+
+  function handleProductClick() {
+    navigate("/product", { state: { product } });
+  }
 
   return (
-    <div>
+    <div onClick={handleProductClick} style={{ cursor: "pointer" }}>
       <img src={imgSrc} width="300" height="300" />
       <div>
-        <h2>
-          <a href={`product`}>{name}</a>
-        </h2>{" "}
+        <h2>{name}</h2>
         <p>
           <s>${originalPrice}</s> ${salePrice}
         </p>
         <p>On sale at {store} until 10/31</p>
-        <button className="button" onClick={() => setAddedToList(!addedToList)}>
+        <button
+          className="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setAddedToList(!addedToList);
+          }}
+        >
           {addedToList ? "Remove from my list" : "Add to my list"}
         </button>
       </div>
@@ -53,6 +77,8 @@ export function SaleProduct({ name, originalPrice, salePrice, store, imgSrc }) {
 }
 
 export function ListProduct({ product }) {
+  const navigate = useNavigate();
+
   const { name, imgSrc, prices } = product;
 
   const { store, price } = Object.entries(prices).reduce(
@@ -63,13 +89,19 @@ export function ListProduct({ product }) {
 
   const [quantity, setQuantity] = React.useState(1);
 
+  function handleProductClick() {
+    navigate("/product", { state: { product } });
+  }
+
   return (
-    <div className="item">
+    <div
+      className="item"
+      onClick={handleProductClick}
+      style={{ cursor: "pointer" }}
+    >
       <img src={imgSrc} />
       <div>
-        <h2>
-          <a href={`product`}>{name}</a>
-        </h2>{" "}
+        <h2>{name}</h2>
         <p>{price}</p>
         <p>Cheapest - {store}</p>
         <label>Quantity:</label>

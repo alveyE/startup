@@ -1,23 +1,20 @@
+import { useLocation } from "react-router";
 import Footer, { MakeSaveList } from "../components/Footer";
 import Navbar from "../components/NavBar";
 import { ProductOverview } from "../components/Product";
 
-const dummyProduct = {
-  name: "Orange Juice",
-  imgSrc: "https://dummyimage.com/600x400/ff8c00/ffffff&text=Orange+Juice",
-  prices: {
-    Walmart: 4.29,
-    Target: 4.49,
-    Costco: 3.99,
-    Safeway: 4.59,
-  },
-};
-
 function ProductPage() {
+  const location = useLocation();
+  const { product } = location.state || {};
+
   return (
     <>
       <Navbar activePage="home" />
-      <ProductOverview product={dummyProduct} />
+      {product ? (
+        <ProductOverview product={product} />
+      ) : (
+        <h2>Product not found</h2>
+      )}
       <MakeSaveList />
       <Footer />
     </>
