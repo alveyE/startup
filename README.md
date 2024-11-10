@@ -40,3 +40,9 @@ Product - The product page will focus on one product showing a breakdown of pric
 Basic styling for lists using grids and other basic css
 
 I'm guessing a lot/most of this will change when we move to react
+
+## React
+
+Split things into components
+
+Much more readable code and re-usable
