@@ -7,7 +7,7 @@ import List from "./pages/List";
 import Sales from "./pages/Sales";
 import ProductPage from "./pages/ProductPage";
 import Login from "./pages/Login";
-import "./index.css";
+import "./main.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
