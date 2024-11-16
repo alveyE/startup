@@ -16,7 +16,7 @@ export function MakeSaveList() {
         To make and save lists
       </p>
       <a
-        href="login.html"
+        href="login"
         style={{
           fontSize: "larger",
           color: "blue",

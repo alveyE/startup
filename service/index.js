@@ -5,7 +5,6 @@ const path = require("path");
 const csv = require("csv-parser");
 const app = express();
 
-// The scores and users are saved in memory and disappear whenever the service is restarted.
 let users = {};
 let prices = [];
 

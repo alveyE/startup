@@ -6,7 +6,6 @@ export function Product({ product }) {
   const { name, imgSrc, prices } = product;
   const navigate = useNavigate();
 
-  console.log(prices);
   const { store, price } = prices.reduce(
     (cheapest, current) => {
       const currentPrice = parseFloat(current.price);
