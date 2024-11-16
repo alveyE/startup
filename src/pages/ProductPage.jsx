@@ -2,6 +2,7 @@ import { useLocation } from "react-router";
 import Footer, { MakeSaveList } from "../components/Footer";
 import Navbar from "../components/NavBar";
 import { ProductOverview } from "../components/Product";
+import React from "react";
 
 function ProductPage() {
   const location = useLocation();

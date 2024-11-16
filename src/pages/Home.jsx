@@ -2,6 +2,7 @@ import "../main.css";
 import Navbar from "../components/NavBar";
 import { Product } from "../components/Product";
 import Footer, { MakeSaveList } from "../components/Footer";
+import React from "react";
 
 const dummyProducts = [
   {
@@ -40,12 +41,22 @@ const dummyProducts = [
 ];
 
 function Home() {
+  const [products, setProducts] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch("/api/prices")
+      .then((response) => response.json())
+      .then((products) => {
+        setProducts(products);
+      });
+  }, []);
+
   return (
     <>
       <Navbar activePage="home" />
       <input type="text" placeholder="Search" className="search-bar" />
       <div className="grid-container">
-        {dummyProducts.map((product, index) => (
+        {products.map((product, index) => (
           <Product key={index} product={product} />
         ))}
       </div>

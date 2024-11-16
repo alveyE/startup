@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import Footer from "../components/Footer";
 import Navbar from "../components/NavBar";
+import React from "react";
 
 function Login() {
   const navigate = useNavigate();

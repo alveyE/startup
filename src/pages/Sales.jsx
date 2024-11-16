@@ -1,6 +1,7 @@
 import Footer, { MakeSaveList } from "../components/Footer";
 import Navbar from "../components/NavBar";
 import { SaleProduct } from "../components/Product";
+import React from "react";
 
 const dummySalesProduct = {
   name: "Bread",

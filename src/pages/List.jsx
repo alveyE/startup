@@ -2,6 +2,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/NavBar";
 import { ListProduct } from "../components/Product";
 import "../main.css";
+import React from "react";
 
 const dummyProducts = [
   {
