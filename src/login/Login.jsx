@@ -5,39 +5,6 @@ import React from "react";
 import { AuthState } from "./authState";
 
 function Login({ userName, authState, onAuthChange }) {
-  const [userNameText, setUserNameText] = React.useState(userName);
-  const [password, setPassword] = React.useState("");
-
-  const navigate = useNavigate();
-
-  async function loginUser() {
-    loginOrCreate(`/api/auth/login`);
-  }
-
-  async function createUser() {
-    loginOrCreate(`/api/auth/create`);
-  }
-
-  async function loginOrCreate(endpoint) {
-    const response = await fetch(endpoint, {
-      method: "post",
-      body: JSON.stringify({ email: userNameText, password: password }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
-    if (response?.status === 200) {
-      localStorage.setItem("userName", userNameText);
-      props.onLogin(userNameText);
-    }
-  }
-
-  function handleSubmit(loginUserName) {
-    event.preventDefault();
-    onAuthChange(loginUserName, AuthState.Authenticated);
-    // navigate("/");
-  }
-
   return (
     <>
       <Navbar />
@@ -48,32 +15,19 @@ function Login({ userName, authState, onAuthChange }) {
         />
       )}
       {authState === AuthState.Unauthenticated && (
-        <>
-          <h2>Login</h2>
-          <form onSubmit={() => handleSubmit(userNameText)}>
-            <label htmlFor="username">Username:</label>
-            <input type="text" id="username" name="username" required />
-            <br />
-            <br />
-            <label htmlFor="password">Password:</label>
-            <input type="password" id="password" name="password" required />
-            <br />
-            <br />
-            <button className="button" onClick={loginUser}>
-              Login
-            </button>
-            <button className="button" onClick={createUser}>
-              Create Account
-            </button>
-          </form>
-        </>
+        <Unauthenticated
+          userName={userName}
+          onLogin={(loginUserName) => {
+            onAuthChange(loginUserName, AuthState.Authenticated);
+          }}
+        />
       )}
       <Footer />
     </>
   );
 }
 
-export function Authenticated(props) {
+function Authenticated(props) {
   const navigate = useNavigate();
 
   function logout() {
@@ -96,6 +50,78 @@ export function Authenticated(props) {
         Logout
       </button>
     </div>
+  );
+}
+
+function Unauthenticated(props) {
+  const navigate = useNavigate();
+
+  const [userName, setUserName] = React.useState(props.userName);
+  const [password, setPassword] = React.useState("");
+  const [displayError, setDisplayError] = React.useState(null);
+
+  async function loginUser() {
+    loginOrCreate(`/api/auth/login`);
+  }
+
+  async function createUser() {
+    loginOrCreate(`/api/auth/create`);
+  }
+
+  async function loginOrCreate(endpoint) {
+    const response = await fetch(endpoint, {
+      method: "post",
+      body: JSON.stringify({ email: userName, password: password }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    if (response?.status === 200) {
+      localStorage.setItem("userName", userName);
+      props.onLogin(userName);
+    } else {
+      const body = await response.json();
+      setDisplayError(`⚠ Error: ${body.msg}`);
+    }
+  }
+  return (
+    <>
+      <div>
+        <div className="input-group mb-3">
+          <span className="input-group-text">@</span>
+          <input
+            className="form-control"
+            type="text"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+            placeholder="your@email.com"
+          />
+        </div>
+        <div className="input-group mb-3">
+          <span className="input-group-text">🔒</span>
+          <input
+            className="form-control"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="password"
+          />
+        </div>
+        <button
+          variant="primary"
+          onClick={() => loginUser()}
+          disabled={!userName || !password}
+        >
+          Login
+        </button>
+        <button
+          variant="secondary"
+          onClick={() => createUser()}
+          disabled={!userName || !password}
+        >
+          Create
+        </button>
+      </div>
+    </>
   );
 }
 

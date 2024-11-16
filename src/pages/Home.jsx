@@ -4,7 +4,7 @@ import { Product } from "../components/Product";
 import Footer, { MakeSaveList } from "../components/Footer";
 import React from "react";
 
-function Home() {
+function Home(props) {
   const [products, setProducts] = React.useState([]);
 
   React.useEffect(() => {
