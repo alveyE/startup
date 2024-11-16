@@ -46,3 +46,11 @@ I'm guessing a lot/most of this will change when we move to react
 Split things into components
 
 Much more readable code and re-usable
+
+## Service
+
+Added the backend service
+I am using a csv file as a database for now
+
+-Calls to the api are made to fetch database prices
+-Users are able to search for items not in the database which then calls a 3rd party api
