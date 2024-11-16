@@ -6,6 +6,7 @@ import React from "react";
 
 function Home(props) {
   const [products, setProducts] = React.useState([]);
+  const [search, setSearch] = React.useState("");
 
   React.useEffect(() => {
     fetch("/api/prices")
@@ -18,11 +19,20 @@ function Home(props) {
   return (
     <>
       <Navbar activePage="home" />
-      <input type="text" placeholder="Search" className="search-bar" />
+      <input
+        type="text"
+        placeholder="Search"
+        className="search-bar"
+        onChange={(e) => {
+          setSearch(e.target.value);
+        }}
+      />
       <div className="grid-container">
-        {products.map((product, index) => (
-          <Product key={index} product={product} />
-        ))}
+        {products
+          .filter((p) => p.name.toLowerCase().includes(search.toLowerCase()))
+          .map((product, index) => (
+            <Product key={index} product={product} />
+          ))}
       </div>
       <MakeSaveList />
       <Footer />

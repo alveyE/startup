@@ -136,7 +136,6 @@ export function ProductOverview({ product }) {
     { store: null, price: Infinity }
   ).store;
 
-  console.log(cheapestStore);
   return (
     <div className="product-container">
       <img src={imgSrc} alt={name} />
