@@ -89,7 +89,7 @@ async function readGrocerPricesFromCsv() {
 
         const pricesRead = Object.entries(storePrices)
           .filter(([key, value]) => key !== "Unit Size" && value)
-          .map(([store, price]) => ({ store, price }));
+          .map(([store, price]) => ({ store, price: parseFloat(price) }));
 
         products.push({
           name: Item,

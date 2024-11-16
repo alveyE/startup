@@ -6,9 +6,13 @@ export function Product({ product }) {
   const { name, imgSrc, prices } = product;
   const navigate = useNavigate();
 
-  const { store, price } = Object.entries(prices).reduce(
-    (cheapest, [store, price]) =>
-      price < cheapest.price ? { store, price } : cheapest,
+  console.log(prices);
+  const { store, price } = prices.reduce(
+    (cheapest, current) => {
+      const currentPrice = parseFloat(current.price);
+      const cheapestPrice = parseFloat(cheapest.price);
+      return currentPrice < cheapestPrice ? current : cheapest;
+    },
     { store: null, price: Infinity }
   );
 
@@ -27,7 +31,7 @@ export function Product({ product }) {
       <img src={imgSrc} alt={name} />
       <div>
         <h2>{name}</h2>
-        <p style={{ fontSize: "larger" }}>{price}</p>
+        <p style={{ fontSize: "larger" }}>${price}</p>
         <p style={{ fontSize: "larger" }}>{store}</p>
         <button
           className="button"
