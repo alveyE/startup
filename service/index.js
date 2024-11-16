@@ -79,6 +79,7 @@ app.listen(port, () => {
 });
 
 async function readGrocerPricesFromCsv() {
+  //using this csv as a temporary database
   const products = [];
   return new Promise((resolve) => {
     fs.createReadStream(path.resolve("GroceryData.csv"))

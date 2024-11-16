@@ -127,26 +127,30 @@ export function ProductOverview({ product }) {
     return <h2>Product not found</h2>;
   }
 
-  const cheapestStore = Object.entries(prices).reduce(
-    (cheapest, [store, price]) =>
-      price < cheapest.price ? { store, price } : cheapest,
+  const cheapestStore = prices.reduce(
+    (cheapest, current) => {
+      const currentPrice = parseFloat(current.price);
+      const cheapestPrice = parseFloat(cheapest.price);
+      return currentPrice < cheapestPrice ? current : cheapest;
+    },
     { store: null, price: Infinity }
-  );
+  ).store;
 
+  console.log(cheapestStore);
   return (
     <div className="product-container">
       <img src={imgSrc} alt={name} />
       <div className="product-details">
         <h2>{name}</h2>
         <ul>
-          {Object.entries(prices).map(([store, price]) => (
-            <li key={store}>
-              {store}: ${price.toFixed(2)}
+          {prices.map((p) => (
+            <li key={p.store}>
+              {p.store}: ${p.price.toFixed(2)}
             </li>
           ))}
         </ul>
         <p style={{ fontSize: "1.5em" }}>
-          <strong>Cheapest - {cheapestStore.store}</strong>
+          <strong>Cheapest - {cheapestStore}</strong>
         </p>
         <button className="button" onClick={() => setAddedToList(!addedToList)}>
           {addedToList ? "Remove from my list" : "Add to my list"}
