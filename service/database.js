@@ -5,7 +5,11 @@ const uuid = require("uuid");
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 
-const client = new MongoClient(url);
+const client = new MongoClient(url, {
+  tls: true,
+  serverSelectionTimeoutMS: 3000,
+  autoSelectFamily: false,
+});
 const db = client.db("aisleHawk");
 const userCollection = db.collection("user");
 const listsCollection = db.collection("lists");
