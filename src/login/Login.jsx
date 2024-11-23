@@ -46,9 +46,7 @@ function Authenticated(props) {
   return (
     <div>
       <div>{props.userName}</div>
-      <button variant="secondary" onClick={() => logout()}>
-        Logout
-      </button>
+      <button onClick={() => logout()}>Logout</button>
     </div>
   );
 }
@@ -106,18 +104,10 @@ function Unauthenticated(props) {
             placeholder="password"
           />
         </div>
-        <button
-          variant="primary"
-          onClick={() => loginUser()}
-          disabled={!userName || !password}
-        >
+        <button onClick={() => loginUser()} disabled={!userName || !password}>
           Login
         </button>
-        <button
-          variant="secondary"
-          onClick={() => createUser()}
-          disabled={!userName || !password}
-        >
+        <button onClick={() => createUser()} disabled={!userName || !password}>
           Create
         </button>
       </div>

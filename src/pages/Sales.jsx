@@ -19,7 +19,6 @@ const dummySalesProduct = {
 function Sales() {
   return (
     <>
-      <Navbar activePage="sales" />
       <SaleProduct
         product={dummySalesProduct}
         originalPrice={2.99}

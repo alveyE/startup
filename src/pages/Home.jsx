@@ -38,7 +38,6 @@ function Home(props) {
 
   return (
     <>
-      <Navbar activePage="home" />
       {isLoading && <h2>Loading...</h2>}
       {!isLoading && (
         <>

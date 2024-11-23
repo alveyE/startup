@@ -161,6 +161,34 @@ li:last-child {
   font-weight: bold;
 }
 
+.navbar-right {
+  float: right;
+  display: block;
+  color: white;
+  text-align: center;
+  font-size: 1.5em;
+  padding: 15px 20px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border-radius: 12px;
+  margin: 0 5px;
+}
+
+.logout {
+  background-color: #780800;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background-color 0.3s ease;
+}
+
 .product-container {
   display: flex;
   align-items: center;

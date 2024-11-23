@@ -66,7 +66,6 @@ function List() {
 
   return (
     <>
-      <Navbar activePage="list" />
       {products.length === 0 && <h2>Your list is empty</h2>}
       {products.length > 0 && (
         <>

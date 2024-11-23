@@ -10,7 +10,6 @@ function ProductPage() {
 
   return (
     <>
-      <Navbar activePage="home" />
       {product ? (
         <ProductOverview product={product} />
       ) : (
