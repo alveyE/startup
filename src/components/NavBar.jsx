@@ -8,9 +8,14 @@ function Navbar(props) {
       <Link className={props.activePage === "home" ? "active" : ""} to="/">
         Aisle Hawk
       </Link>
-      <Link className={props.activePage === "list" ? "active" : ""} to="/list">
-        My List
-      </Link>
+      {props.username && (
+        <Link
+          className={props.activePage === "list" ? "active" : ""}
+          to="/list"
+        >
+          My List
+        </Link>
+      )}
       <Link
         className={props.activePage === "sales" ? "active" : ""}
         to="/sales"
