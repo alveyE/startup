@@ -38,7 +38,7 @@ export function Product({ product, inList }) {
         <p style={{ fontSize: "larger" }}>{store}</p>
         <button
           className="button"
-          style={{ backgroundColor: addedToList ? "#780800" : "0066cc" }}
+          style={{ backgroundColor: addedToList ? "#780800" : "#0066cc" }}
           onClick={(e) => {
             e.stopPropagation();
             setAddedToList(!addedToList);
