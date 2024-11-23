@@ -41,7 +41,7 @@ export function App() {
           <Route path="/sales.html" element={<Sales />} />
           <Route path="/product.html" element={<ProductPage />} />
 
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home username={userName} />} />
           <Route path="/list" element={<List />} />
           <Route path="/sales" element={<Sales />} />
           <Route path="/product" element={<ProductPage />} />

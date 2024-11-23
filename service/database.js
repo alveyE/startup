@@ -42,8 +42,20 @@ async function createUser(email, password) {
   return user;
 }
 
-async function addList(list) {
-  return listsCollection.insertOne(list);
+async function addList(username, product) {
+  const list = await listsCollection.findOne({ username: username });
+
+  if (list) {
+    await listsCollection.updateOne(
+      { username: username },
+      { $push: { products: product } }
+    );
+  } else {
+    await listsCollection.insertOne({
+      username: username,
+      products: [product],
+    });
+  }
 }
 
 module.exports = {

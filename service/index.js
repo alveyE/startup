@@ -75,6 +75,17 @@ apiRouter.get("/prices", (_req, res) => {
   res.send(prices);
 });
 
+apiRouter.post("/list", async (req, res) => {
+  const authToken = req.cookies[authCookieName];
+  const user = await DB.getUserByToken(authToken);
+  if (user) {
+    await DB.addList(user.email, req.body.product);
+    res.status(201).send();
+  } else {
+    res.status(401).send({ msg: "Unauthorized" });
+  }
+});
+
 const secureApiRouter = express.Router();
 apiRouter.use(secureApiRouter);
 

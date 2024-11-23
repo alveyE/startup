@@ -62,7 +62,7 @@ function Home(props) {
           </div>
         </>
       )}
-      <MakeSaveList />
+      {!props.username && <MakeSaveList />}
       <Footer />
     </>
   );
