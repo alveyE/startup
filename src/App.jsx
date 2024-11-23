@@ -57,7 +57,19 @@ export function AppContent({ userName, setUserName }) {
     <>
       <Navbar
         username={userName}
-        onLogout={() => setUserName("")}
+        onLogout={() => {
+          fetch(`/api/auth/logout`, {
+            method: "delete",
+          })
+            .catch(() => {
+              // Logout failed. Assuming offline
+            })
+            .finally(() => {
+              setAuthState(AuthState.Unauthenticated);
+              setUserName("");
+              localStorage.removeItem("userName");
+            });
+        }}
         activePage={getActivePage()}
       />
 

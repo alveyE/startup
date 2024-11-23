@@ -7,7 +7,6 @@ import { AuthState } from "./authState";
 function Login({ userName, authState, onAuthChange }) {
   return (
     <>
-      <Navbar />
       {authState === AuthState.Authenticated && (
         <Authenticated
           userName={userName}

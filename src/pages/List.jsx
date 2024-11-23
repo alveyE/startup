@@ -62,7 +62,7 @@ function List() {
         ["", Infinity]
       )[0]
     );
-  }, [products]);
+  }, [products, totals]);
 
   return (
     <>
