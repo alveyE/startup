@@ -4,8 +4,43 @@ import { ListProduct } from "../components/Product";
 import "../main.css";
 import React from "react";
 
+function calculateTotals(products) {
+  const totals = {};
+  const storeCounts = {};
+
+  products.forEach((product) => {
+    Object.entries(product.prices).forEach(([store, price]) => {
+      if (!storeCounts[price.store]) {
+        storeCounts[price.store] = 0;
+      }
+      storeCounts[price.store]++;
+    });
+  });
+
+  const validStores = Object.keys(storeCounts).filter(
+    (store) => storeCounts[store] === products.length
+  );
+
+  console.log(validStores);
+
+  products.forEach((product) => {
+    Object.entries(product.prices).forEach(([store, price]) => {
+      if (!validStores.includes(price.store)) {
+        return;
+      }
+      if (!totals[price.store]) {
+        totals[price.store] = 0;
+      }
+      totals[price.store] += parseFloat(price.price);
+    });
+  });
+  return totals;
+}
+
 function List() {
   const [products, setProducts] = React.useState([]);
+  const [totals, setTotals] = React.useState({});
+  const [cheapestStore, setCheapestStore] = React.useState("");
 
   React.useEffect(() => {
     fetch("/api/list")
@@ -14,6 +49,20 @@ function List() {
         setProducts(list);
       });
   }, []);
+
+  React.useEffect(() => {
+    setTotals(calculateTotals(products));
+    setCheapestStore(
+      Object.entries(totals).reduce(
+        (cheapest, current) => {
+          const currentPrice = parseFloat(current[1]);
+          const cheapestPrice = parseFloat(cheapest[1]);
+          return currentPrice < cheapestPrice ? current : cheapest;
+        },
+        ["", Infinity]
+      )[0]
+    );
+  }, [products]);
 
   return (
     <>
@@ -33,14 +82,12 @@ function List() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Walmart</td>
-                <td>$2.99</td>
-              </tr>
-              <tr>
-                <td>Winco</td>
-                <td>$3.74</td>
-              </tr>
+              {Object.entries(totals).map(([store, total]) => (
+                <tr key={store}>
+                  <td>{store}</td>
+                  <td>${Number(total).toFixed(2)}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -48,7 +95,7 @@ function List() {
       <div className="summary">
         <p>
           For your list the most cost effective store is{" "}
-          <strong>Walmart</strong>
+          <strong>{cheapestStore}</strong>
         </p>
       </div>
       <Footer />

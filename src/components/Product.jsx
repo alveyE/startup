@@ -96,8 +96,6 @@ export function ListProduct({ product }) {
 
   const { name, imgSrc, prices } = product;
 
-  console.log(prices);
-
   const { store, price } = prices.reduce(
     (cheapest, current) => {
       const currentPrice = parseFloat(current.price);
@@ -120,7 +118,7 @@ export function ListProduct({ product }) {
       <img src={imgSrc} />
       <div>
         <h2>{name}</h2>
-        <p>{price}</p>
+        <p>${price}</p>
         <p>Cheapest - {store}</p>
       </div>
     </div>
