@@ -67,37 +67,48 @@ function List() {
   return (
     <>
       <Navbar activePage="list" />
-      <div className="list-container">
-        <div className="item-list">
-          {products.map((product, index) => (
-            <ListProduct key={index} product={product} />
-          ))}
-        </div>
-        <div className="price-table">
-          <table>
-            <thead>
-              <tr>
-                <th>Store</th>
-                <th>Total Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.entries(totals).map(([store, total]) => (
-                <tr key={store}>
-                  <td>{store}</td>
-                  <td>${Number(total).toFixed(2)}</td>
-                </tr>
+      {products.length === 0 && <h2>Your list is empty</h2>}
+      {products.length > 0 && (
+        <>
+          <div className="list-container">
+            <div className="item-list">
+              {products.map((product, index) => (
+                <ListProduct
+                  key={index}
+                  product={product}
+                  removeFromList={(productRemoved) => {
+                    setProducts(products.filter((p) => p !== productRemoved));
+                  }}
+                />
               ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div className="summary">
-        <p>
-          For your list the most cost effective store is{" "}
-          <strong>{cheapestStore}</strong>
-        </p>
-      </div>
+            </div>
+            <div className="price-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Store</th>
+                    <th>Total Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.entries(totals).map(([store, total]) => (
+                    <tr key={store}>
+                      <td>{store}</td>
+                      <td>${Number(total).toFixed(2)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="summary">
+            <p>
+              For your list the most cost effective store is{" "}
+              <strong>{cheapestStore}</strong>
+            </p>
+          </div>
+        </>
+      )}
       <Footer />
     </>
   );

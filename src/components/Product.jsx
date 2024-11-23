@@ -38,6 +38,7 @@ export function Product({ product, inList }) {
         <p style={{ fontSize: "larger" }}>{store}</p>
         <button
           className="button"
+          style={{ backgroundColor: addedToList ? "#780800" : "0066cc" }}
           onClick={(e) => {
             e.stopPropagation();
             setAddedToList(!addedToList);
@@ -91,10 +92,11 @@ export function SaleProduct({ product, originalPrice, salePrice, store }) {
   );
 }
 
-export function ListProduct({ product }) {
+export function ListProduct(props) {
   const navigate = useNavigate();
 
-  const { name, imgSrc, prices } = product;
+  const { name, imgSrc, prices } = props.product;
+  const product = props.product;
 
   const { store, price } = prices.reduce(
     (cheapest, current) => {
@@ -121,6 +123,22 @@ export function ListProduct({ product }) {
         <p>${price}</p>
         <p>Cheapest - {store}</p>
       </div>
+      <button
+        className="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          props.removeFromList(props.product);
+          fetch("/api/list", {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ product }),
+          });
+        }}
+      >
+        Remove from my list
+      </button>
     </div>
   );
 }
