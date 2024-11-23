@@ -86,6 +86,28 @@ apiRouter.post("/list", async (req, res) => {
   }
 });
 
+apiRouter.get("/list", async (req, res) => {
+  const authToken = req.cookies[authCookieName];
+  const user = await DB.getUserByToken(authToken);
+  if (user) {
+    const list = await DB.getList(user.email);
+    res.send(list);
+  } else {
+    res.status(401).send({ msg: "Unauthorized" });
+  }
+});
+
+apiRouter.delete("/list", async (req, res) => {
+  const authToken = req.cookies[authCookieName];
+  const user = await DB.getUserByToken(authToken);
+  if (user) {
+    await DB.removeFromList(user.email, req.body.product);
+    res.status(204).send();
+  } else {
+    res.status(401).send({ msg: "Unauthorized" });
+  }
+});
+
 const secureApiRouter = express.Router();
 apiRouter.use(secureApiRouter);
 

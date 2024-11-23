@@ -58,6 +58,20 @@ async function addList(username, product) {
   }
 }
 
+async function removeFromList(username, product) {
+  const list = await listsCollection.findOne({ username: username });
+  if (list) {
+    await listsCollection.updateOne(
+      {
+        username: username,
+      },
+      {
+        $pull: { products: product },
+      }
+    );
+  }
+}
+
 module.exports = {
   getUser,
   getUserByToken,
