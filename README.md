@@ -54,3 +54,14 @@ I am using a csv file as a database for now
 
 -Calls to the api are made to fetch database prices
 -Users are able to search for items not in the database which then calls a 3rd party api
+
+## Login & Mongo
+
+Connected mongoDB database
+Created endpoints for authentication and store users in mongo
+
+Endpoints must be validated with authentication
+
+Also created a collection for lists and save users lists info in mongo so list can be saved and retrieved
+
+Can only access my list tab if logged in
