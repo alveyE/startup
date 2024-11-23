@@ -76,6 +76,7 @@ apiRouter.get("/prices", (_req, res) => {
 });
 
 apiRouter.post("/list", async (req, res) => {
+  console.log("adding to list");
   const authToken = req.cookies[authCookieName];
   const user = await DB.getUserByToken(authToken);
   if (user) {

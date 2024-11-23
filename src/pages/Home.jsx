@@ -8,6 +8,16 @@ function Home(props) {
   const [products, setProducts] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
+  const [list, setList] = React.useState(new Set());
+
+  React.useEffect(() => {
+    fetch("/api/list")
+      .then((response) => response.json())
+      .then((list) => {
+        const listSet = new Set(list.map((product) => product.name));
+        setList(listSet);
+      });
+  }, []);
 
   React.useEffect(() => {
     fetch("/api/prices")
@@ -57,7 +67,11 @@ function Home(props) {
                 p.name.toLowerCase().includes(search.toLowerCase())
               )
               .map((product, index) => (
-                <Product key={index} product={product} />
+                <Product
+                  key={index}
+                  product={product}
+                  inList={list.has(product.name)}
+                />
               ))}
           </div>
         </>

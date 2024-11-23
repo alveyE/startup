@@ -72,9 +72,16 @@ async function removeFromList(username, product) {
   }
 }
 
+async function getList(username) {
+  const list = await listsCollection.findOne({ username: username });
+  return list ? list.products : [];
+}
+
 module.exports = {
   getUser,
   getUserByToken,
   createUser,
   addList,
+  removeFromList,
+  getList,
 };

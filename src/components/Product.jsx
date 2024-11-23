@@ -2,9 +2,15 @@ import React from "react";
 import "../main.css";
 import { useNavigate } from "react-router-dom";
 
-export function Product({ product }) {
+export function Product({ product, inList }) {
   const { name, imgSrc, prices } = product;
+  const [addedToList, setAddedToList] = React.useState(inList);
+
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    setAddedToList(inList);
+  }, [inList]);
 
   const { store, price } = prices.reduce(
     (cheapest, current) => {
@@ -14,8 +20,6 @@ export function Product({ product }) {
     },
     { store: null, price: Infinity }
   );
-
-  const [addedToList, setAddedToList] = React.useState(false);
 
   function handleProductClick() {
     navigate("/product", { state: { product } });
@@ -37,6 +41,14 @@ export function Product({ product }) {
           onClick={(e) => {
             e.stopPropagation();
             setAddedToList(!addedToList);
+            //call api to add/remove to list
+            fetch("/api/list", {
+              method: addedToList ? "DELETE" : "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ product }),
+            });
           }}
         >
           {addedToList ? "Remove from my list" : "Add to my list"}
@@ -84,13 +96,16 @@ export function ListProduct({ product }) {
 
   const { name, imgSrc, prices } = product;
 
-  const { store, price } = Object.entries(prices).reduce(
-    (cheapest, [store, price]) =>
-      price < cheapest.price ? { store, price } : cheapest,
+  console.log(prices);
+
+  const { store, price } = prices.reduce(
+    (cheapest, current) => {
+      const currentPrice = parseFloat(current.price);
+      const cheapestPrice = parseFloat(cheapest.price);
+      return currentPrice < cheapestPrice ? current : cheapest;
+    },
     { store: null, price: Infinity }
   );
-
-  const [quantity, setQuantity] = React.useState(1);
 
   function handleProductClick() {
     navigate("/product", { state: { product } });
@@ -107,13 +122,6 @@ export function ListProduct({ product }) {
         <h2>{name}</h2>
         <p>{price}</p>
         <p>Cheapest - {store}</p>
-        <label>Quantity:</label>
-        <input
-          type="number"
-          min="1"
-          value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
-        />
       </div>
     </div>
   );
