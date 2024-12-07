@@ -59,18 +59,27 @@ export function Product({ product, inList }) {
   );
 }
 
-export function SaleProduct({ product, originalPrice, salePrice, store }) {
+export function SaleProduct({
+  product,
+  originalPrice,
+  salePrice,
+  store,
+  onPriceUpdate,
+}) {
   const [addedToList, setAddedToList] = React.useState(false);
+  const [newPrice, setNewPrice] = React.useState("");
+
   const navigate = useNavigate();
 
   const { name, imgSrc } = product;
 
-  function handleProductClick() {
-    navigate("/product", { state: { product } });
+  function handleNewPriceSubmit(e) {
+    onPriceUpdate(product, newPrice);
+    setNewPrice("");
   }
 
   return (
-    <div onClick={handleProductClick} style={{ cursor: "pointer" }}>
+    <div style={{ cursor: "pointer" }}>
       <img src={imgSrc} width="300" height="300" />
       <div>
         <h2>{name}</h2>
@@ -81,12 +90,40 @@ export function SaleProduct({ product, originalPrice, salePrice, store }) {
         <button
           className="button"
           onClick={(e) => {
+            const productToAdd = {
+              name: name,
+              imgSrc: imgSrc,
+              prices: [
+                {
+                  store: store,
+                  price: salePrice,
+                },
+              ],
+            };
             e.stopPropagation();
+            fetch("/api/list", {
+              method: addedToList ? "DELETE" : "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ product: productToAdd }),
+            });
             setAddedToList(!addedToList);
           }}
         >
           {addedToList ? "Remove from my list" : "Add to my list"}
         </button>
+        <form onSubmit={handleNewPriceSubmit}>
+          <input
+            type="text"
+            value={newPrice}
+            onChange={(e) => setNewPrice(e.target.value)}
+            placeholder="Report new price"
+          />
+          <button className="button" type="submit">
+            Submit
+          </button>
+        </form>
       </div>
     </div>
   );
