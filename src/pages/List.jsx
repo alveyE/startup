@@ -21,8 +21,6 @@ function calculateTotals(products) {
     (store) => storeCounts[store] === products.length
   );
 
-  console.log(validStores);
-
   products.forEach((product) => {
     Object.entries(product.prices).forEach(([store, price]) => {
       if (!validStores.includes(price.store)) {
