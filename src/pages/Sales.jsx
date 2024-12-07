@@ -2,6 +2,7 @@ import Footer, { MakeSaveList } from "../components/Footer";
 import Navbar from "../components/NavBar";
 import { SaleProduct } from "../components/Product";
 import React from "react";
+import { SaleNotifier } from "../saleNotifier";
 
 const dummySalesProduct = {
   name: "Bread",
@@ -24,6 +25,13 @@ function Sales() {
         originalPrice={2.99}
         salePrice={1.99}
         store="Walmart"
+        onPriceUpdate={(product, newPrice) => {
+          SaleNotifier.broadcastEvent(
+            product.name,
+            newPrice,
+            new Date().toLocaleDateString("en-US")
+          );
+        }}
       />
       <MakeSaveList />
       <Footer />

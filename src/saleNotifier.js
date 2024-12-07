@@ -26,8 +26,8 @@ class SaleMessageNotifier {
     };
   }
 
-  broadcastEvent(from, type, value) {
-    const event = new SaleMessage(from, type, value);
+  broadcastEvent(product, price, date) {
+    const event = new SaleMessage(product, price, date);
     this.socket.send(JSON.stringify(event));
   }
 

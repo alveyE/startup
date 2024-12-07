@@ -74,6 +74,9 @@ export function SaleProduct({
   const { name, imgSrc } = product;
 
   function handleNewPriceSubmit(e) {
+    if (newPrice.length === 0) {
+      return;
+    }
     onPriceUpdate(product, newPrice);
     setNewPrice("");
   }
@@ -113,17 +116,17 @@ export function SaleProduct({
         >
           {addedToList ? "Remove from my list" : "Add to my list"}
         </button>
-        <form onSubmit={handleNewPriceSubmit}>
+        <div>
           <input
             type="text"
             value={newPrice}
             onChange={(e) => setNewPrice(e.target.value)}
             placeholder="Report new price"
           />
-          <button className="button" type="submit">
+          <button className="button" onClick={handleNewPriceSubmit}>
             Submit
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );
