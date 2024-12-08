@@ -18,6 +18,20 @@ const dummySalesProduct = {
 };
 
 function Sales() {
+  const [sales, setSales] = React.useState([]);
+
+  React.useEffect(() => {
+    SaleNotifier.addHandler(handleSaleReported);
+
+    return () => {
+      SaleNotifier.removeHandler(handleSaleReported);
+    };
+  });
+
+  function handleSaleReported(event) {
+    setSales([...sales, event]);
+  }
+
   return (
     <>
       <SaleProduct
@@ -33,7 +47,18 @@ function Sales() {
           );
         }}
       />
+      <div>
+        <h2>Updated Prices</h2>
+        <ul>
+          {sales.map((sale, index) => (
+            <li key={index}>
+              {sale.product} at ${sale.price} on {sale.date}
+            </li>
+          ))}
+        </ul>
+      </div>
       <MakeSaveList />
+
       <Footer />
     </>
   );

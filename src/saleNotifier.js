@@ -16,6 +16,7 @@ class SaleMessageNotifier {
     this.socket = new WebSocket(
       `${protocol}://${window.location.hostname}:${port}/ws`
     );
+
     this.socket.onmessage = async (msg) => {
       try {
         const event = JSON.parse(await msg.data.text());
