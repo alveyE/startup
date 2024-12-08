@@ -65,3 +65,7 @@ Endpoints must be validated with authentication
 Also created a collection for lists and save users lists info in mongo so list can be saved and retrieved
 
 Can only access my list tab if logged in
+
+## Websocket
+
+On the sales page users can report an updated price on an item and it will display to other users
